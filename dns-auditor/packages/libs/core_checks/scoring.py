@@ -246,9 +246,7 @@ def _penalty_for(status: str, area: str) -> float:
 def _rating_for(summary_score: float) -> str:
     if summary_score >= RATING_THRESHOLDS["green"]:
         return "green"
-    if summary_score >= RATING_THRESHOLDS["amber"]:
-        return "amber"
-    return "red"
+    return "amber" if summary_score >= RATING_THRESHOLDS["amber"] else "red"
 
 # -------------------------------
 # Example (manual test)
