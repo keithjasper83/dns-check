@@ -1,0 +1,11 @@
+# dns-auditor
+
+Copyright 2025 The dns-auditor Contributors
+
+dns-auditor is a self-hosted, MXToolbox-style analyzer for domain/DNS/email/web posture.
+
+This product includes software developed at
+The dns-auditor Project (https://github.com/dns-auditor/dns-auditor).
+
+This product includes a number of third-party dependencies. See the `ATTRIBUTIONS.md`
+file in the `third_party` directory for more information.
