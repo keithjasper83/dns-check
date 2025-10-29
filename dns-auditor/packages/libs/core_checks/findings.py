@@ -47,13 +47,19 @@ references: Tuple[str, ...] = field(default_factory=tuple)
 # Helper API (use these in checks)
 # -------------------------------
 
+import logging
+
 def render_message(spec: FindingSpec, **fmt: Any) -> str:
-"""Render a human-friendly message from the template."""
-try:
-return spec.message_tmpl.format(**fmt)
-except Exception:
-# Fall back to unformatted template if args missing
-return spec.message_tmpl
+    """Render a human-friendly message from the template."""
+    try:
+        return spec.message_tmpl.format(**fmt)
+    except (KeyError, ValueError) as exc:
+        logging.warning(
+            "Failed to format message for FindingSpec '%s': %s. Falling back to unformatted template.",
+            getattr(spec, "code", "<unknown>"),
+            exc,
+        )
+        return spec.message_tmpl
 
 def make_finding(
 code: str,
