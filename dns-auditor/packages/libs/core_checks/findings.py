@@ -657,6 +657,6 @@ class FindingSpec:
                 print("Catalog problems:")
                 for p in probs:
                     print("-", p)
-                else:
-                    print(f"Catalog OK. {len(REGISTRY)} codes defined.")
-                    print("Sample:", list_codes()[:10])
+            else:
+                print(f"Catalog OK. {len(REGISTRY)} codes defined.")
+                print("Sample:", list_codes()[:10])
