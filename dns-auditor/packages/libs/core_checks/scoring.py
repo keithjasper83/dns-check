@@ -259,7 +259,7 @@ if __name__ == "__main__":
         ],
         "spf": [
             {"code": "SPF_PRESENT", "status": "ok", "title": "", "message": "", "remediation": "", "tags": ["SPF","EMAIL"]},
-            {"code": "SPF_LOOKUP_COUNT_.venv/lib/python3.12/site-packages/dns/rdtypes/ANY/HIP.pyHIGH", "status": "warn", "title": "", "message": "", "remediation": "", "tags": ["SPF","EMAIL"], "data": {"count": 9}},
+            {"code": "SPF_LOOKUP_COUNT_HIGH", "status": "warn", "title": "", "message": "", "remediation": "", "tags": ["SPF","EMAIL"], "data": {"count": 9}},
         ],
         "dmarc": [
             {"code": "DMARC_MISSING", "status": "fail", "title": "", "message": "", "remediation": "", "tags": ["DMARC","EMAIL"]},
