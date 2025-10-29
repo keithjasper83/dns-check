@@ -1,0 +1,87 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dns-auditor"
+version = "0.0.1"
+authors = [
+  { name="The dns-auditor Contributors" },
+]
+description = "A self-hosted, MXToolbox-style analyzer for domain/DNS/email/web posture."
+readme = "README.md"
+requires-python = ">=3.12"
+license = {text = "Apache-2.0"}
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: Apache Software License",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/example/dns-auditor"
+"Bug Tracker" = "https://github.com/example/dns-auditor/issues"
+
+# All dependencies will be managed as optional-dependencies for now,
+# allowing for granular installation for api, worker, etc.
+[project.optional-dependencies]
+# Core check dependencies
+checks = [
+    "dnspython",
+    "httpx",
+    "dkimpy",
+]
+# API server dependencies
+api = [
+    "fastapi",
+    "uvicorn[standard]",
+    "sqlalchemy",
+    "sqlmodel",
+    "alembic",
+    "slowapi",
+]
+# Worker dependencies
+worker = [
+    "redis",
+    "rq",
+]
+# Development and testing dependencies
+dev = [
+    "pytest>=8.0",
+    "ruff",
+    "black",
+    "mypy",
+    "bandit",
+    "pip-licenses",
+    "licensecheck",
+    "reuse",
+    "cyclonedx-python-lib",
+    "nox",
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["packages*"]
+exclude = ["packages.*.tests"]
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = "-ra -q --color=yes"
+testpaths = [
+    "packages/libs/core_checks/tests",
+]
+pythonpath = "." # Add current dir to python path to resolve `packages`
+
+[tool.ruff]
+line-length = 88
+select = ["E", "F", "W", "I"]
+target-version = "py312"
+
+[tool.black]
+line-length = 88
+target-version = ["py312"]
+
+[tool.mypy]
+strict = true
+ignore_missing_imports = true
+files = "packages"
