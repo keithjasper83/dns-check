@@ -108,18 +108,18 @@ class FindingSpec:
         for code, spec in REGISTRY.items():
             if code != spec.code:
                 problems.append(f"{code}: REGISTRY key != spec.code")
-                if code in seen:
-                    problems.append(f"{code}: duplicate code")
-                    seen.add(code)
-                    if not code.isupper():
-                        problems.append(f"{code}: code not uppercase")
-                        if not spec.title.strip():
-                            problems.append(f"{code}: empty title")
-                            if not spec.message_tmpl.strip():
-                                problems.append(f"{code}: empty message_tmpl")
-                                if spec.default_status not in Status.__members__.values():
-                                    problems.append(f"{code}: invalid default_status")
-                                    return problems
+            if code in seen:
+                problems.append(f"{code}: duplicate code")
+            seen.add(code)
+            if not code.isupper():
+                problems.append(f"{code}: code not uppercase")
+            if not spec.title.strip():
+                problems.append(f"{code}: empty title")
+            if not spec.message_tmpl.strip():
+                problems.append(f"{code}: empty message_tmpl")
+            if spec.default_status not in Status.__members__.values():
+                problems.append(f"{code}: invalid default_status")
+        return problems
 
 
                                 # -------------------------------
