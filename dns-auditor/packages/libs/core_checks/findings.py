@@ -56,12 +56,12 @@ class FindingSpec:
             return spec.message_tmpl
 
     def make_finding(
-    code: str,
-    *,
-    status_override: Optional[Status] = None,
-    data: Optional[Mapping[str, Any]] = None,
-    evidence: Optional[Mapping[str, Any]] = None,
-    message_args: Optional[Mapping[str, Any]] = None,
+        code: str,
+        *,
+        status_override: Optional[Status] = None,
+        data: Optional[Mapping[str, Any]] = None,
+        evidence: Optional[Mapping[str, Any]] = None,
+        message_args: Optional[Mapping[str, Any]] = None,
     ) -> Dict[str, Any]:
         """
         Create a normalized finding dict ready for persistence / API return.
