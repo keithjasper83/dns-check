@@ -73,16 +73,16 @@ class FindingSpec:
         spec = REGISTRY[code]
         msg = render_message(spec, **(message_args or {}))
         return {
-    "code": spec.code,
-    "status": (status_override or spec.default_status).value,
-    "title": spec.title,
-    "message": msg,
-    "remediation": spec.remediation,
-    "tags": sorted(spec.tags),
-    "references": list(spec.references),
-    "data": dict(data or {}),
-    "evidence": dict(evidence or {}),
-    }
+            "code": spec.code,
+            "status": (status_override or spec.default_status).value,
+            "title": spec.title,
+            "message": msg,
+            "remediation": spec.remediation,
+            "tags": sorted(spec.tags),
+            "references": list(spec.references),
+            "data": dict(data or {}),
+            "evidence": dict(evidence or {}),
+        }
 
     def list_codes(*, include_tags: Optional[Iterable[str]] = None, exclude_tags: Optional[Iterable[str]] = None) -> List[str]:
         """List known codes, with optional tag filtering."""
