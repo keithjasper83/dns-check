@@ -61,24 +61,31 @@ def render_message(spec: FindingSpec, **fmt: Any) -> str:
         )
         return spec.message_tmpl
 
+class InvalidFindingCodeError(Exception):
+    """Raised when an invalid finding code is provided to make_finding."""
+
 def make_finding(
-code: str,
-*,
-status_override: Optional[Status] = None,
-data: Optional[Mapping[str, Any]] = None,
-evidence: Optional[Mapping[str, Any]] = None,
-message_args: Optional[Mapping[str, Any]] = None,
+    code: str,
+    *,
+    status_override: Optional[Status] = None,
+    data: Optional[Mapping[str, Any]] = None,
+    evidence: Optional[Mapping[str, Any]] = None,
+    message_args: Optional[Mapping[str, Any]] = None,
 ) -> Dict[str, Any]:
-"""
-Create a normalized finding dict ready for persistence / API return.
-- code must exist in REGISTRY
-- status may be overridden (e.g., based on thresholds)
-- data is machine-readable detail
-- evidence is raw material captured (e.g., TXT strings, cert PEM)
-"""
-spec = REGISTRY[code]
-msg = render_message(spec, **(message_args or {}))
-return {
+    """
+    Create a normalized finding dict ready for persistence / API return.
+    - code must exist in REGISTRY
+    - status may be overridden (e.g., based on thresholds)
+    - data is machine-readable detail
+    - evidence is raw material captured (e.g., TXT strings, cert PEM)
+    Raises:
+        InvalidFindingCodeError: if code is not present in REGISTRY.
+    """
+    if code not in REGISTRY:
+        raise InvalidFindingCodeError(f"Finding code '{code}' not found in REGISTRY.")
+    spec = REGISTRY[code]
+    msg = render_message(spec, **(message_args or {}))
+    return {
 "code": spec.code,
 "status": (status_override or spec.default_status).value,
 "title": spec.title,
