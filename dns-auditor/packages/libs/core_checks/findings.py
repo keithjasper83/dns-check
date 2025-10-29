@@ -96,7 +96,7 @@ class FindingSpec:
             if exc and (tags & exc):
                 continue
             out.append(code)
-            return sorted(out)
+        return sorted(out)
 
     def validate_registry() -> List[str]:
         """
